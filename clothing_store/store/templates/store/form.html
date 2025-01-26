@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор стилей и размеров</title>
+    <!-- Подключение внешнего файла стилей -->
+    <link rel="stylesheet" href="{% static 'store/style.css' %}">
+</head>
+<body>
+    <h1>Выберите ваши предпочтения</h1>
+    
+    <!-- HTML-форма -->
+    <form method="post">
+        {% csrf_token %} <!-- Это необходимо для защиты от CSRF-атак -->
+        
+        <!-- Выпадающий список для выбора стиля -->
+        <label for="style">Любимый стиль:</label>
+        <select name="style" id="style">
+            <option value="casual">Casual</option>
+            <option value="sport">Спортивный</option>
+            <option value="formal">Деловой</option>
+        </select>
+        <br>
+        
+        <!-- Выпадающий список для выбора размера -->
+        <label for="size">Размер:</label>
+        <select name="size" id="size">
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+        </select>
+        <br>
+        
+        <!-- Кнопка отправки формы -->
+        <button type="submit">Сохранить</button>
+    </form>
+    <p>Ваш текущий стиль: {{ preferred_style }}</p>
+    <p>Ваш текущий размер: {{ preferred_size }}</p>
+    <img src="{% static 'store/clothing.jpg' %}" alt="Магазин одежды" width="300">
+</body>
+</html>
